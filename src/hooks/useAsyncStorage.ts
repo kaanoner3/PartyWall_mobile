@@ -26,6 +26,7 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
 
   const clearStorageItem = async () => {
     setStoredValue(null);
+    await AsyncStorage.removeItem(key);
   };
 
   const setValue = async (value: string) => {
