@@ -5,7 +5,7 @@ import { Routes } from './routes';
 import ImageAtom from '../modules/atoms/ImageAtom';
 import Home from '../../assets/images/home.png';
 import Profile from '../../assets/images/profile-user.png';
-import EmptyScreen from '../modules/organism/EmptyScreen';
+import EmptyScreen from '../modules/pages/EmptyScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

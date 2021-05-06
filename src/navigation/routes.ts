@@ -3,4 +3,6 @@ export enum Routes {
   PROFILE_TAB = 'PROFILE_TAB',
   HOME_SCREEN = 'HOME_SCREEN',
   PROFILE_SCREEN = 'PROFILE_SCREEN',
+  LOGIN = 'LOGIN',
+  SIGN_UP = 'SIGN_UP',
 }

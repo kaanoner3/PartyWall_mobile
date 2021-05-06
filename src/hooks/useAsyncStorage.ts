@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const useAsyncStorage = (key: string, initialValue: any = null) => {
   const [storedValue, setStoredValue] = useState(initialValue);
   const [loading, setLoading] = useState(true);
+
   const getItem: () => void = async () => {
     setLoading(true);
     try {
@@ -11,7 +12,6 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
 
       if (value !== null) {
         value = JSON.parse(value);
-
         setLoading(false);
         setStoredValue(value);
       }
@@ -20,6 +20,7 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
       console.log('useAsyncStorage getItem error', e);
     }
   };
+
   useEffect(() => {
     getItem();
   }, [key, initialValue]);

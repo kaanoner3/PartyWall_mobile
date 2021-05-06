@@ -5,12 +5,12 @@ import React, {
   FC,
   useState,
   Dispatch,
-  SetStateAction,
+  SetStateAction, ReactChild,
 } from 'react';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 interface AuthenticationProviderProps {
-  children: FC;
+  children: ReactChild;
 }
 interface AuthInputData {
   username: string;
