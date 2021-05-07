@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
-import {
-  StyleSheet,
-  TextInput,
-  TextInputProps,
-} from 'react-native';
+import { StyleProp, StyleSheet, TextInputProps, TextStyle } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 interface InputAtomProps {
-  onChangeText: () => void;
+  onChangeText: (text: string) => void;
   value: string;
-  customStyles: TextInputProps;
+  customStyles?: StyleProp<TextStyle>;
+  label: string;
 }
 
 const InputAtom: FC<InputAtomProps> = ({
-  customStyles,
+  customStyles = {},
   onChangeText,
   value,
+  label = '',
   ...otherProps
 }) => {
   return (
     <TextInput
-      style={[styles.container, customStyles]}
-      placeholderTextColor={'#000'}
-      onChangeText={onChangeText}
+      mode="outlined"
+      dense
+      style={customStyles}
+      label={label}
       value={value}
-      {...otherProps}
+      onChangeText={onChangeText}
     />
   );
 };
