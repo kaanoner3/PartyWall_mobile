@@ -5,6 +5,7 @@ import { AuthenticationProvider } from './src/providers/AuthenticationProvider';
 export default function App() {
   return (
     <AuthenticationProvider>
+
       <Navigation />
     </AuthenticationProvider>
   );

@@ -18,10 +18,10 @@ const Stack = createStackNavigator();
 
 function RootNavigator() {
   const { token } = useContext(AuthenticationContext);
-  console.log({ token });
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {token === null ? (
+      {!token ? (
         <Stack.Screen name="Auth" component={AuthenticationNavigator} />
       ) : (
         <Stack.Screen name="App" component={BottomTabNavigator} />

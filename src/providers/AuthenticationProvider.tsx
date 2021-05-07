@@ -5,7 +5,8 @@ import React, {
   FC,
   useState,
   Dispatch,
-  SetStateAction, ReactChild,
+  SetStateAction,
+  ReactChild,
 } from 'react';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
@@ -19,7 +20,7 @@ interface AuthInputData {
 }
 
 interface AuthContextType {
-  token: string;
+  token: string | null;
   setAuthMutationInput: Dispatch<SetStateAction<AuthInputData>>;
 }
 
@@ -38,10 +39,9 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
   });
 
   const [userStorage, setUserStorage, loading, clear] = useAsyncStorage(
-    '@user',
-    null
+    '@user'
   );
-
+  useAsyncStorage('@user')
   useEffect(() => {
     const { username, password, type } = authMutationInput;
     if (type && type === 'login') {
