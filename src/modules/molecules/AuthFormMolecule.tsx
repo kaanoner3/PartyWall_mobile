@@ -27,6 +27,7 @@ const AuthFormMolecule: FC<AuthFormMoleculeProps> = ({
         label={'password'}
         onChangeText={(text: string) => setPassword(text)}
         value={password}
+        password
       />
     </View>
   );

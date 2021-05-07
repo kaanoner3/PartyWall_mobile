@@ -7,14 +7,15 @@ interface InputAtomProps {
   value: string;
   customStyles?: StyleProp<TextStyle>;
   label: string;
+  password?: boolean;
 }
 
 const InputAtom: FC<InputAtomProps> = ({
   customStyles = {},
   onChangeText,
   value,
+  password = false,
   label = '',
-  ...otherProps
 }) => {
   return (
     <TextInput
@@ -24,6 +25,7 @@ const InputAtom: FC<InputAtomProps> = ({
       label={label}
       value={value}
       onChangeText={onChangeText}
+      secureTextEntry={password}
     />
   );
 };

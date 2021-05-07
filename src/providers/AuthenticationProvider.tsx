@@ -10,9 +10,12 @@ import React, {
 import useAsyncStorage from '../hooks/useAsyncStorage';
 import SIGN_UP_MUTATION, {
   relaySignUpMutation,
-  relaySignUpMutationVariables,
   relaySignUpMutationResponse,
 } from '../__generated__/relaySignUpMutation.graphql';
+import LOG_IN_MUTATION, {
+  relayLogInMutation,
+  relayLogInMutationResponse,
+} from '../__generated__/relayLogInMutation.graphql';
 import { useMutation } from 'relay-hooks/lib';
 
 interface AuthenticationProviderProps {
@@ -42,23 +45,41 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
     password: '',
     type: undefined,
   });
+
   const [createUser] = useMutation<relaySignUpMutation>(SIGN_UP_MUTATION, {
     onError: (err: any) => {
-      console.log({ err });
+
     },
     onCompleted: (res: relaySignUpMutationResponse) => {
-      console.log({ res });
+      setUserStorage(res.createUserMutation?.token);
     },
   });
+
+  const [logInUser] = useMutation<relayLogInMutation>(LOG_IN_MUTATION, {
+    onError: (err: any) => {
+
+    },
+    onCompleted: (res: relayLogInMutationResponse) => {
+      setUserStorage(res.loginMutation?.token);
+    },
+  });
+
   const [userStorage, setUserStorage, loading, clear] = useAsyncStorage(
     '@user'
   );
 
   useEffect(() => {
+    //clear();
     const { username, password, type } = authMutationInput;
     if (type && type === 'login') {
-      //TODO: commit login mutation
-      console.log(authMutationInput);
+      logInUser({
+        variables: {
+          input: {
+            username,
+            password,
+          },
+        },
+      });
     }
     if (type && type === 'register') {
       createUser({
@@ -69,7 +90,6 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
           },
         },
       });
-      console.log(authMutationInput);
     }
   }, [authMutationInput]);
 
