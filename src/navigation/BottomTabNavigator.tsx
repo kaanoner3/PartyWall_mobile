@@ -6,6 +6,7 @@ import ImageAtom from '../modules/atoms/ImageAtom';
 import Home from '../../assets/images/home.png';
 import Profile from '../../assets/images/profile-user.png';
 import EmptyScreen from '../modules/pages/EmptyScreen';
+import HomeScreen from '../modules/pages/HomeScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -49,7 +50,7 @@ function TabOneNavigator() {
     <HomeTabStack.Navigator screenOptions={{ headerShown: false }}>
       <ProfileTabStack.Screen
         name={Routes.HOME_SCREEN}
-        component={EmptyScreen}
+        component={HomeScreen}
       />
     </HomeTabStack.Navigator>
   );

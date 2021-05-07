@@ -41,7 +41,7 @@ async function fetchQuery(
   if (token) {
     headers['Authorization'] = `JWT ${token}`;
   }
-
+  console.log({ token });
   headers['Content-Type'] = 'application/json';
   body = JSON.stringify({
     query: operation.text,

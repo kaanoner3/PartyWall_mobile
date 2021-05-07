@@ -3,16 +3,35 @@ import { graphql } from 'relay-hooks';
 graphql`
   mutation relaySignUpMutation($input: createUserMutationInput!) {
     createUserMutation(input: $input) {
-        token
+      token
     }
   }
 `;
-
 
 graphql`
   mutation relayLogInMutation($input: loginMutationInput!) {
     loginMutation(input: $input) {
       token
+    }
+  }
+`;
+
+graphql`
+  query relayAllItemsQuery {
+    itemQuery {
+      allItems {
+        id
+        name
+        price
+        quantity
+        userName
+        categoryName
+        attributes {
+            weight
+            volume
+            description
+        }
+      }
     }
   }
 `;

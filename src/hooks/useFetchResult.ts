@@ -28,10 +28,12 @@ const useFetchResults = (error: any, data: any) => {
     if (data && !data[Object.keys(data)[0]]) {
       return {
         status: 'noData',
+        payload: undefined,
       };
     }
     return {
       status: 'loading',
+      payload: undefined,
     };
   };
 

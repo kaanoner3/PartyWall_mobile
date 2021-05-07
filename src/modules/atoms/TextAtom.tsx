@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  TextStyle,
+} from 'react-native';
 
-interface TextAtomProps {}
+interface TextAtomProps {
+  customStyles?: TextStyle;
+  value: string | number;
+}
 
-const TextAtom: FC<TextAtomProps> = ({}) => {
-  return (
-    <View style={styles.container}>
-      <Text>TextAtom</Text>
-    </View>
-  );
+const TextAtom: FC<TextAtomProps> = ({ customStyles = {}, value }) => {
+  return <Text style={[styles.container, customStyles]}>{value}</Text>;
 };
 
 export default TextAtom;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
