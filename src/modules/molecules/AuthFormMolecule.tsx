@@ -2,12 +2,19 @@ import React, { FC, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import InputAtom from '../atoms/InputAtom';
 
-interface AuthFormMoleculeProps {}
+interface AuthFormMoleculeProps {
+  username: string;
+  setUsername: (text: string) => void;
+  setPassword: (text: string) => void;
+  password: string;
+}
 
-const AuthFormMolecule: FC<AuthFormMoleculeProps> = ({}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
+const AuthFormMolecule: FC<AuthFormMoleculeProps> = ({
+  username,
+  password,
+  setPassword,
+  setUsername,
+}) => {
   return (
     <View style={styles.container}>
       <InputAtom

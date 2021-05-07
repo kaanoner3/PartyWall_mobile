@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  useReducer,
   useEffect,
   FC,
   useState,
@@ -9,6 +8,12 @@ import React, {
   ReactChild,
 } from 'react';
 import useAsyncStorage from '../hooks/useAsyncStorage';
+import SIGN_UP_MUTATION, {
+  relaySignUpMutation,
+  relaySignUpMutationVariables,
+  relaySignUpMutationResponse,
+} from '../__generated__/relaySignUpMutation.graphql';
+import { useMutation } from 'relay-hooks/lib';
 
 interface AuthenticationProviderProps {
   children: ReactChild;
@@ -37,18 +42,34 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
     password: '',
     type: undefined,
   });
-
+  const [createUser] = useMutation<relaySignUpMutation>(SIGN_UP_MUTATION, {
+    onError: (err: any) => {
+      console.log({ err });
+    },
+    onCompleted: (res: relaySignUpMutationResponse) => {
+      console.log({ res });
+    },
+  });
   const [userStorage, setUserStorage, loading, clear] = useAsyncStorage(
     '@user'
   );
-  useAsyncStorage('@user')
+
   useEffect(() => {
     const { username, password, type } = authMutationInput;
     if (type && type === 'login') {
       //TODO: commit login mutation
+      console.log(authMutationInput);
     }
     if (type && type === 'register') {
-      //TODO: commit signup mutation
+      createUser({
+        variables: {
+          input: {
+            username,
+            password,
+          },
+        },
+      });
+      console.log(authMutationInput);
     }
   }, [authMutationInput]);
 

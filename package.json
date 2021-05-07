@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "relay": "relay-compiler --src ./ --schema ./data/schema.json --language typescript --exclude '**/node_modules/**' '**/test/**'  '**/__generated__/**' --artifactDirectory ./src/__generated__"
+    "relay": "relay-compiler --src ./ --schema ../multytude-assignment/src/app/schema/schema.graphql --language typescript --exclude '**/node_modules/**' '**/test/**'  '**/__generated__/**' --artifactDirectory ./src/__generated__"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.0",
@@ -25,6 +25,8 @@
     "react-native-screens": "^3.1.1",
     "react-native-web": "~0.13.12",
     "react-relay": "^11.0.2",
+    "relay-compiler": "^11.0.2",
+    "relay-compiler-language-typescript": "^14.0.0",
     "relay-hooks": "^4.2.0"
   },
   "devDependencies": {

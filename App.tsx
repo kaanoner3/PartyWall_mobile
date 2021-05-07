@@ -3,6 +3,8 @@ import Navigation from './src/navigation';
 import { AuthenticationProvider } from './src/providers/AuthenticationProvider';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native';
+import { RelayEnvironmentProvider } from 'relay-hooks/lib';
+import environment from './src/relay/environment';
 
 export default function App() {
   const theme = {
@@ -14,12 +16,14 @@ export default function App() {
     },
   };
   return (
-    <AuthenticationProvider>
-      <PaperProvider theme={theme}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <Navigation />
-        </SafeAreaView>
-      </PaperProvider>
-    </AuthenticationProvider>
+    <RelayEnvironmentProvider environment={environment}>
+      <AuthenticationProvider>
+        <PaperProvider theme={theme}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <Navigation />
+          </SafeAreaView>
+        </PaperProvider>
+      </AuthenticationProvider>
+    </RelayEnvironmentProvider>
   );
 }
