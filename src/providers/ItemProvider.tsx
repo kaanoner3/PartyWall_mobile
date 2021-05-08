@@ -23,6 +23,9 @@ import USER_ITEMS_QUERY, {
   relayUserItemsQuery,
 } from '../__generated__/relayUserItemsQuery.graphql';
 import { useFetchResult } from '../hooks/useFetchResult';
+import ALL_ITEMS_QUERY, {
+  relayAllItemsQuery,
+} from '../__generated__/relayAllItemsQuery.graphql';
 
 interface ItemProviderProps {
   children: ReactChild;
@@ -71,6 +74,7 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
   );
   const [shouldCreateItem, setShouldCreateItem] = useState(false);
   const [myItems, setMyItems] = useState<any>([]);
+  const [allItems, setAllItems] = useState<ItemType[]>([]);
   const [willRemoveItemId, setWillRemoveItemId] = useState<string>('');
   const { userData } = useContext(AuthenticationContext);
   const userItemsQueryResult = useQuery<relayUserItemsQuery>(
@@ -85,6 +89,22 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
     userItemsQueryResult.error,
     userItemsQueryResult.data
   );
+  const allItemsQueryResult = useQuery<relayAllItemsQuery>(ALL_ITEMS_QUERY, {
+    fetchPolicy: STORE_OR_NETWORK,
+  });
+  const allItemsResult = useFetchResult(
+    allItemsQueryResult.error,
+    allItemsQueryResult.data
+  );
+
+  useEffect(() => {
+    if (
+      allItemsResult.status === 'success' &&
+      allItemsResult.payload.itemQuery?.allItems.length > 0
+    ) {
+      setAllItems(allItemsResult.payload.itemQuery.allItems);
+    }
+  }, [allItemsResult.payload]);
 
   useEffect(() => {
     if (
@@ -145,6 +165,8 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
         },
         onCompleted: (res: relayCreateItemMutationResponse) => {
           setMyItems(res.createItemMutation?.item);
+          allItemsQueryResult.retry({ force: true });
+          setItemMutationInput(initialItemInputData);
         },
         onError: (err) => {
           console.log({ err });
@@ -158,7 +180,7 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
     <ItemContext.Provider
       value={{
         itemData: {},
-        allItems: [],
+        allItems,
         userItems: myItems,
         setItemMutationInput,
         itemMutationInput,

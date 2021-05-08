@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ItemListMolecule from '../molecules/ItemListMolecule';
 import ALL_ITEMS_QUERY, {
@@ -7,26 +7,17 @@ import ALL_ITEMS_QUERY, {
 import { STORE_OR_NETWORK, useQuery } from 'relay-hooks/lib';
 import { useFetchResult } from '../../hooks/useFetchResult';
 import HeaderMolecule from '../molecules/HeaderMolecule';
+import { ItemContext } from '../../providers/ItemProvider';
 
 interface HomeScreenProps {}
 
 const HomeScreen: FC<HomeScreenProps> = ({}) => {
-  const [items, setItems] = useState<ItemType[]>([]);
-  const { error, data } = useQuery<relayAllItemsQuery>(ALL_ITEMS_QUERY, {
-    fetchPolicy: STORE_OR_NETWORK,
-  });
-  const { status, payload } = useFetchResult(error, data);
-
-  useEffect(() => {
-    if (status === 'success' && payload.itemQuery?.allItems.length > 0) {
-      setItems(payload.itemQuery.allItems);
-    }
-  }, [payload]);
+  const { allItems } = useContext(ItemContext);
 
   return (
     <View style={styles.container}>
       <HeaderMolecule title={'Party Wall'} titleStyle={styles.titleStyle} />
-      <ItemListMolecule listType="allItems" listData={items} />
+      <ItemListMolecule listType="allItems" listData={allItems} />
     </View>
   );
 };
