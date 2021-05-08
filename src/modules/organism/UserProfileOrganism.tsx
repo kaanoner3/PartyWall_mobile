@@ -9,7 +9,7 @@ import USER_ITEMS_QUERY, {
 import { useFetchResult } from '../../hooks/useFetchResult';
 import { AuthenticationContext } from '../../providers/AuthenticationProvider';
 import ListItemMolecule from '../molecules/ListItemMolecule';
-import ItemListOrganism from './ItemListOrganism';
+import ItemListMolecule from '../molecules/ItemListMolecule';
 import HeaderMolecule from '../molecules/HeaderMolecule';
 import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../../navigation/routes';
@@ -49,7 +49,7 @@ const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
         title={'My Items'}
         titleStyle={styles.titleStyle}
       />
-      <ItemListOrganism listType={'userItems'} listData={userItems} />
+      <ItemListMolecule listType={'userItems'} listData={userItems} />
     </View>
   );
 };

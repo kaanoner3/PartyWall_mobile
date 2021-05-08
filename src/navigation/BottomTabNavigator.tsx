@@ -47,10 +47,7 @@ export default function BottomTabNavigator(): any {
           ),
           tabBarVisible: ((route: any) => {
             const routeName = getFocusedRouteNameFromRoute(route);
-            if (routeName === Routes.CREATE_ITEM) {
-              return false;
-            }
-            return true;
+            return routeName !== Routes.CREATE_ITEM;
           })(route),
         })}
       />
@@ -70,7 +67,7 @@ function TabOneNavigator() {
 
 const ProfileTabStack = createStackNavigator();
 
-function TabTwoNavigator({ navigation }: { navigation: any }) {
+function TabTwoNavigator() {
   return (
     <ProfileTabStack.Navigator screenOptions={{ headerShown: false }}>
       <ProfileTabStack.Screen

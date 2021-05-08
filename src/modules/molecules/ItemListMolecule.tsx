@@ -1,16 +1,16 @@
 import React, { FC, useState } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import HeaderMolecule from '../molecules/HeaderMolecule';
-import ListItemMolecule from '../molecules/ListItemMolecule';
-import ListProfileItemMolecule from '../molecules/ListProfileItemMolecule';
+import HeaderMolecule from './HeaderMolecule';
+import ListItemMolecule from './ListItemMolecule';
+import ListProfileItemMolecule from './ListProfileItemMolecule';
 import TextAtom from '../atoms/TextAtom';
 
-interface ItemListOrganismProps {
+interface ItemListMoleculeProps {
   listData: ItemType[];
   listType: 'allItems' | 'userItems';
 }
 
-const ItemListOrganism: FC<ItemListOrganismProps> = ({
+const ItemListMolecule: FC<ItemListMoleculeProps> = ({
   listData = [],
   listType,
 }) => {
@@ -43,7 +43,7 @@ const ItemListOrganism: FC<ItemListOrganismProps> = ({
   );
 };
 
-export default ItemListOrganism;
+export default ItemListMolecule;
 
 const styles = StyleSheet.create({
   container: {

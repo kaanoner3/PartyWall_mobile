@@ -9,6 +9,7 @@ const CreateItemScreen: FC<CreateItemScreenProps> = ({}) => {
   const [selectedCategory, setSelectedCategory] = useState<itemCategoryType>(
     'Food'
   );
+
   return (
     <View style={styles.container}>
       <HeaderMolecule

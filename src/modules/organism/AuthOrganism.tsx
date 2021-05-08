@@ -9,7 +9,7 @@ interface AuthOrganismProps {}
 const AuthOrganism: FC<AuthOrganismProps> = ({}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { token, setAuthMutationInput } = useContext(AuthenticationContext);
+  const { setAuthMutationInput } = useContext(AuthenticationContext);
 
   const onLoginPress = () => {
     setAuthMutationInput({ username, password, type: 'login' });

@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
-import { StyleProp, StyleSheet, TextInputProps, TextStyle } from 'react-native';
+import {
+  KeyboardType,
+  StyleProp,
+  StyleSheet,
+  TextInputProps,
+  TextStyle,
+} from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 interface InputAtomProps {
@@ -8,6 +14,7 @@ interface InputAtomProps {
   customStyles?: StyleProp<TextStyle>;
   label: string;
   password?: boolean;
+  keyboardType?: KeyboardType;
 }
 
 const InputAtom: FC<InputAtomProps> = ({
@@ -16,6 +23,7 @@ const InputAtom: FC<InputAtomProps> = ({
   value,
   password = false,
   label = '',
+  keyboardType = 'default',
 }) => {
   return (
     <TextInput
@@ -26,6 +34,7 @@ const InputAtom: FC<InputAtomProps> = ({
       value={value}
       onChangeText={onChangeText}
       secureTextEntry={password}
+      keyboardType={keyboardType}
     />
   );
 };

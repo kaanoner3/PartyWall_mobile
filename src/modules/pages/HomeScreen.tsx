@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import ItemListOrganism from '../organism/ItemListOrganism';
+import ItemListMolecule from '../molecules/ItemListMolecule';
 import ALL_ITEMS_QUERY, {
   relayAllItemsQuery,
 } from '../../__generated__/relayAllItemsQuery.graphql';
@@ -26,7 +26,7 @@ const HomeScreen: FC<HomeScreenProps> = ({}) => {
   return (
     <View style={styles.container}>
       <HeaderMolecule title={'Party Wall'} titleStyle={styles.titleStyle} />
-      <ItemListOrganism listType="allItems" listData={items} />
+      <ItemListMolecule listType="allItems" listData={items} />
     </View>
   );
 };

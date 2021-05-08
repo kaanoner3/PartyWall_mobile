@@ -5,6 +5,7 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native';
 import { RelayEnvironmentProvider } from 'relay-hooks/lib';
 import environment from './src/relay/environment';
+import { ItemProvider } from './src/providers/ItemProvider';
 
 export default function App() {
   const theme = {
@@ -18,11 +19,13 @@ export default function App() {
   return (
     <RelayEnvironmentProvider environment={environment}>
       <AuthenticationProvider>
-        <PaperProvider theme={theme}>
-          <SafeAreaView style={{ flex: 1 }}>
-            <Navigation />
-          </SafeAreaView>
-        </PaperProvider>
+        <ItemProvider>
+          <PaperProvider theme={theme}>
+            <SafeAreaView style={{ flex: 1 }}>
+              <Navigation />
+            </SafeAreaView>
+          </PaperProvider>
+        </ItemProvider>
       </AuthenticationProvider>
     </RelayEnvironmentProvider>
   );

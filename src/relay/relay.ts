@@ -17,6 +17,16 @@ graphql`
     }
   }
 `;
+graphql`
+  mutation relayCreateItemMutation($input: createItemMutationInput!) {
+    createItemMutation(input: $input) {
+      item {
+        id
+        name
+      }
+    }
+  }
+`;
 
 graphql`
   query relayAllItemsQuery {
