@@ -1,20 +1,20 @@
 import React, {FC} from 'react';
 import {View, Text, StyleSheet} from "react-native"
 
-interface CategoryPickerMoleculeProps {}
+interface CreateDrinkFromMoleculeProps {}
 
 
-const CategoryPickerMolecule: FC<CategoryPickerMoleculeProps> = ({}) => {
+const CreateDrinkFromMolecule: FC<CreateDrinkFromMoleculeProps> = ({}) => {
 
     return (
         <View style={styles.container}>
-            <Text>CategoryPickerMolecule</Text>
-            
+            <Text>CreateDrinkFromMolecule</Text>
+
         </View>
     );
 };
 
-export default CategoryPickerMolecule;
+export default CreateDrinkFromMolecule;
 
 
 const styles = StyleSheet.create({

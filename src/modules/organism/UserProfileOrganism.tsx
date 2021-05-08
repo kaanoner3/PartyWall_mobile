@@ -12,6 +12,7 @@ import ListItemMolecule from '../molecules/ListItemMolecule';
 import ItemListOrganism from './ItemListOrganism';
 import HeaderMolecule from '../molecules/HeaderMolecule';
 import { useNavigation } from '@react-navigation/native';
+import { Routes } from '../../navigation/routes';
 
 interface UserProfileOrganismProps {}
 
@@ -36,7 +37,10 @@ const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
     }
   }, [payload]);
 
-  const redirectCreateItemPage = () => {};
+  const redirectCreateItemPage = () => {
+    navigation.navigate(Routes.CREATE_ITEM, { userId: userData.userId });
+  };
+
   return (
     <View style={styles.container}>
       <HeaderMolecule

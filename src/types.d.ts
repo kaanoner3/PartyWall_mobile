@@ -3,9 +3,6 @@ type BottomTabParamList = {
   PROFILE_TAB: undefined;
 };
 
-
-
-
 interface ItemAttributes {
   volume?: number;
   weight?: number;
@@ -13,14 +10,14 @@ interface ItemAttributes {
 }
 
 interface ItemType {
-  id:string
+  id: string;
   name: string;
   price: number;
   quantity: number;
-  categoryName: string
-  userName: string
+  categoryName: string;
+  userName: string;
   attributes: ItemAttributes;
 }
 
-
+type itemCategoryType = 'Food' | 'Drink';
 declare module '*.png';

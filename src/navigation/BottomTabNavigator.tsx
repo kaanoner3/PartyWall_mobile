@@ -8,6 +8,9 @@ import Profile from '../../assets/images/profile-user.png';
 import EmptyScreen from '../modules/pages/EmptyScreen';
 import HomeScreen from '../modules/pages/HomeScreen';
 import ProfileScreen from '../modules/pages/ProfileScreen';
+import CreateItemScreen from '../modules/pages/CreateItemScreen';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { Route } from 'react-native';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -29,20 +32,27 @@ export default function BottomTabNavigator(): any {
       <BottomTab.Screen
         name={Routes.HOME_TAB}
         component={TabOneNavigator}
-        options={{
+        options={({ route }) => ({
           tabBarIcon: () => (
             <ImageAtom style={{ tintColor: '#fff' }} source={Home} />
           ),
-        }}
+        })}
       />
       <BottomTab.Screen
         name={Routes.PROFILE_TAB}
         component={TabTwoNavigator}
-        options={{
+        options={({ route }) => ({
           tabBarIcon: () => (
             <ImageAtom style={{ tintColor: '#fff' }} source={Profile} />
           ),
-        }}
+          tabBarVisible: ((route: any) => {
+            const routeName = getFocusedRouteNameFromRoute(route);
+            if (routeName === Routes.CREATE_ITEM) {
+              return false;
+            }
+            return true;
+          })(route),
+        })}
       />
     </BottomTab.Navigator>
   );
@@ -53,22 +63,23 @@ const HomeTabStack = createStackNavigator();
 function TabOneNavigator() {
   return (
     <HomeTabStack.Navigator screenOptions={{ headerShown: false }}>
-      <ProfileTabStack.Screen
-        name={Routes.HOME_SCREEN}
-        component={HomeScreen}
-      />
+      <HomeTabStack.Screen name={Routes.HOME_SCREEN} component={HomeScreen} />
     </HomeTabStack.Navigator>
   );
 }
 
 const ProfileTabStack = createStackNavigator();
 
-function TabTwoNavigator() {
+function TabTwoNavigator({ navigation }: { navigation: any }) {
   return (
     <ProfileTabStack.Navigator screenOptions={{ headerShown: false }}>
       <ProfileTabStack.Screen
         name={Routes.PROFILE_SCREEN}
         component={ProfileScreen}
+      />
+      <ProfileTabStack.Screen
+        name={Routes.CREATE_ITEM}
+        component={CreateItemScreen}
       />
     </ProfileTabStack.Navigator>
   );

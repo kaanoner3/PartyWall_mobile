@@ -5,4 +5,5 @@ export enum Routes {
   PROFILE_SCREEN = 'PROFILE_SCREEN',
   LOGIN = 'LOGIN',
   SIGN_UP = 'SIGN_UP',
+  CREATE_ITEM = 'CREATE_ITEM',
 }
