@@ -1,14 +1,14 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import HeaderMolecule from '../molecules/HeaderMolecule';
 import CreateItemOrganism from '../organism/CreateItemOrganism';
+import ButtonAtom from '../atoms/ButtonAtom';
+import { ItemContext } from '../../providers/ItemProvider';
 
 interface CreateItemScreenProps {}
 
 const CreateItemScreen: FC<CreateItemScreenProps> = ({}) => {
-  const [selectedCategory, setSelectedCategory] = useState<itemCategoryType>(
-    'Food'
-  );
+  const { setShouldCreateItem } = useContext(ItemContext);
 
   return (
     <View style={styles.container}>
@@ -17,7 +17,11 @@ const CreateItemScreen: FC<CreateItemScreenProps> = ({}) => {
         isBackButtonActive
         titleStyle={styles.titleStyle}
       />
-      <CreateItemOrganism selectedCategory={selectedCategory} />
+      <CreateItemOrganism selectedCategory={'Food'} />
+      <ButtonAtom
+        onPress={() => setShouldCreateItem(true)}
+        text="Create Item"
+      />
     </View>
   );
 };

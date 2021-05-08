@@ -23,6 +23,15 @@ graphql`
       item {
         id
         name
+        price
+        quantity
+        userName
+        categoryName
+        attributes {
+          weight
+          volume
+          description
+        }
       }
     }
   }

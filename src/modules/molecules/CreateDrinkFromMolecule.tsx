@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, {FC, useContext, useEffect} from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import InputAtom from '../atoms/InputAtom';
 import { ItemContext } from '../../providers/ItemProvider';
@@ -7,7 +7,9 @@ interface CreateDrinkFromMoleculeProps {}
 
 const CreateDrinkFromMolecule: FC<CreateDrinkFromMoleculeProps> = ({}) => {
   const { setItemMutationInput, itemMutationInput } = useContext(ItemContext);
-
+    useEffect(() => {
+        setItemMutationInput({ ...itemMutationInput, categoryId: 1 });
+    }, []);
   return (
     <View style={styles.container}>
       <InputAtom
@@ -52,6 +54,7 @@ export default CreateDrinkFromMolecule;
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     width: Dimensions.get('window').width - 40,
     marginLeft: 20,
   },

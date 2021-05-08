@@ -8,19 +8,19 @@ import USER_ITEMS_QUERY, {
 } from '../../__generated__/relayUserItemsQuery.graphql';
 import { useFetchResult } from '../../hooks/useFetchResult';
 import { AuthenticationContext } from '../../providers/AuthenticationProvider';
-import ListItemMolecule from '../molecules/ListItemMolecule';
 import ItemListMolecule from '../molecules/ItemListMolecule';
 import HeaderMolecule from '../molecules/HeaderMolecule';
 import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../../navigation/routes';
+import { ItemContext } from '../../providers/ItemProvider';
 
 interface UserProfileOrganismProps {}
 
 const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
-  const [userItems, setUserItems] = useState<ItemType[]>([]);
+  //const [userItems, setUserItems] = useState<ItemType[]>([]);
   const { userData } = useContext(AuthenticationContext);
   const navigation = useNavigation();
-
+  const { userItems } = useContext(ItemContext);
   const { error, data } = useQuery<relayUserItemsQuery>(
     USER_ITEMS_QUERY,
     {
@@ -33,14 +33,14 @@ const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
 
   useEffect(() => {
     if (payload && payload.userQuery?.person?.items.length > 0) {
-      setUserItems(payload.userQuery?.person?.items);
+      //setUserItems(payload.userQuery?.person?.items);
     }
   }, [payload]);
 
   const redirectCreateItemPage = () => {
     navigation.navigate(Routes.CREATE_ITEM, { userId: userData.userId });
   };
-
+  console.log({ userItems });
   return (
     <View style={styles.container}>
       <HeaderMolecule
