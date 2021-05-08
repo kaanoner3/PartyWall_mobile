@@ -8,7 +8,6 @@ import React, {
   ReactChild,
   useContext,
 } from 'react';
-import useAsyncStorage from '../hooks/useAsyncStorage';
 import CREATE_ITEM_MUTATION, {
   relayCreateItemMutation,
   relayCreateItemMutationResponse,
@@ -41,7 +40,6 @@ interface ItemInputData {
 }
 
 interface AuthContextType {
-  itemData: any;
   allItems: ItemType[];
   userItems: ItemType[];
   itemMutationInput: ItemInputData;
@@ -59,7 +57,6 @@ const initialItemInputData = {
   categoryId: 0,
 };
 const ItemContext = createContext<AuthContextType>({
-  itemData: {},
   allItems: [],
   userItems: [],
   itemMutationInput: initialItemInputData,
@@ -159,7 +156,6 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
     } = itemMutationInput;
     if (shouldCreateItem) {
       let attributes = {};
-
       if (categoryId === 0) {
         attributes = { weight, description };
       } else {
@@ -192,7 +188,6 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
   return (
     <ItemContext.Provider
       value={{
-        itemData: {},
         allItems,
         userItems: myItems,
         setItemMutationInput,

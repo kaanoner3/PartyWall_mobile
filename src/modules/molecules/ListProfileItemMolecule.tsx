@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import ImageAtom from '../atoms/ImageAtom';
 import foodPng from '../../../assets/images/dish.png';
 import drinkPng from '../../../assets/images/cocktail.png';
@@ -10,10 +10,12 @@ import { ItemContext } from '../../providers/ItemProvider';
 
 interface ListProfileItemMoleculeProps {
   item: ItemType;
+  onPress: () => void;
 }
 
 const ListProfileItemMolecule: FC<ListProfileItemMoleculeProps> = ({
   item,
+  onPress,
 }) => {
   const { setWillRemoveItemId } = useContext(ItemContext);
 
@@ -23,7 +25,7 @@ const ListProfileItemMolecule: FC<ListProfileItemMoleculeProps> = ({
 
   const hideDialog = () => setVisible(false);
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         <View style={styles.itemIconView}>
           <ImageAtom
@@ -80,7 +82,7 @@ const ListProfileItemMolecule: FC<ListProfileItemMoleculeProps> = ({
           </View>
         </Dialog>
       </Portal>
-    </View>
+    </TouchableOpacity>
   );
 };
 

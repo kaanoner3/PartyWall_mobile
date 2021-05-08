@@ -9,6 +9,7 @@
     "relay": "relay-compiler --src ./ --schema ../multytude-assignment/src/app/schema/schema.graphql --language typescript --exclude '**/node_modules/**' '**/test/**'  '**/__generated__/**' --artifactDirectory ./src/__generated__"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^3.6.4",
     "@react-native-async-storage/async-storage": "^1.13.0",
     "@react-navigation/bottom-tabs": "^5.11.10",
     "@react-navigation/native": "^5.9.4",
@@ -20,7 +21,6 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
-    "react-native-gesture-handler": "^1.10.3",
     "react-native-pager-view": "^5.1.7",
     "react-native-paper": "^4.8.1",
     "react-native-paper-tabs": "^0.4.2",
@@ -30,7 +30,9 @@
     "reactotron-react-native": "^5.0.0",
     "relay-compiler": "^11.0.2",
     "relay-compiler-language-typescript": "^14.0.0",
-    "relay-hooks": "^4.2.0"
+    "relay-hooks": "^4.2.0",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-reanimated": "~2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

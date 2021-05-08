@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import ImageAtom from '../atoms/ImageAtom';
 import foodPng from '../../../assets/images/dish.png';
 import drinkPng from '../../../assets/images/cocktail.png';
 import TextAtom from '../atoms/TextAtom';
 
 interface ListItemMoleculeProps {
-
+  onPress?: () => void;
   item: ItemType;
 }
 
-const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item }) => {
+const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item, onPress }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         <View style={styles.itemIconView}>
           <ImageAtom
@@ -38,7 +38,7 @@ const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item }) => {
           customStyles={styles.textQty}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
