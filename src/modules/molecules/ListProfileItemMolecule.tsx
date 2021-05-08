@@ -5,12 +5,13 @@ import foodPng from '../../../assets/images/dish.png';
 import drinkPng from '../../../assets/images/cocktail.png';
 import TextAtom from '../atoms/TextAtom';
 
-interface ListItemMoleculeProps {
-
+interface ListProfileItemMoleculeProps {
   item: ItemType;
 }
 
-const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item }) => {
+const ListProfileItemMolecule: FC<ListProfileItemMoleculeProps> = ({
+  item,
+}) => {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
@@ -42,7 +43,7 @@ const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item }) => {
   );
 };
 
-export default ListItemMolecule;
+export default ListProfileItemMolecule;
 
 const styles = StyleSheet.create({
   container: {

@@ -5,7 +5,8 @@ import ALL_ITEMS_QUERY, {
   relayAllItemsQuery,
 } from '../../__generated__/relayAllItemsQuery.graphql';
 import { STORE_OR_NETWORK, useQuery } from 'relay-hooks/lib';
-import useFetchResults from '../../hooks/useFetchResult';
+import { useFetchResult } from '../../hooks/useFetchResult';
+import HeaderMolecule from '../molecules/HeaderMolecule';
 
 interface HomeScreenProps {}
 
@@ -14,7 +15,7 @@ const HomeScreen: FC<HomeScreenProps> = ({}) => {
   const { error, data } = useQuery<relayAllItemsQuery>(ALL_ITEMS_QUERY, {
     fetchPolicy: STORE_OR_NETWORK,
   });
-  const { status, payload } = useFetchResults(error, data);
+  const { status, payload } = useFetchResult(error, data);
 
   useEffect(() => {
     if (status === 'success' && payload.itemQuery?.allItems.length > 0) {
@@ -22,11 +23,10 @@ const HomeScreen: FC<HomeScreenProps> = ({}) => {
     }
   }, [payload]);
 
-  //const { status, payload } = useFetchResults(error, props);
-
   return (
     <View style={styles.container}>
-      <ItemListOrganism listData={items} />
+      <HeaderMolecule title={'Party Wall'} titleStyle={styles.titleStyle} />
+      <ItemListOrganism listType="allItems" listData={items} />
     </View>
   );
 };
@@ -36,5 +36,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  titleStyle: {
+    fontSize: 32,
+    color: '#fff',
   },
 });
