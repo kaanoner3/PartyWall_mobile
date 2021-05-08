@@ -17,11 +17,11 @@ export default function Navigation({}: {}): any {
 const Stack = createStackNavigator();
 
 function RootNavigator() {
-  const { token } = useContext(AuthenticationContext);
+  const { userData } = useContext(AuthenticationContext);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {!token ? (
+      {!(userData !== null && userData.token) ? (
         <Stack.Screen name="Auth" component={AuthenticationNavigator} />
       ) : (
         <Stack.Screen name="App" component={BottomTabNavigator} />

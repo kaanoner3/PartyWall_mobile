@@ -6,7 +6,7 @@ import {
   Store,
 } from 'relay-runtime';
 
-import { sessionUtils, saveSession } from '../utils/sessionUtils';
+import { getSession } from '../utils/sessionUtils';
 
 const oneMinute = 60 * 1000;
 const cache = new QueryResponseCache({ size: 250, ttl: oneMinute });
@@ -34,14 +34,15 @@ async function fetchQuery(
   };
   let token;
   try {
-    token = await sessionUtils();
+    let userData = await getSession();
+    token = userData && JSON.parse(userData).token;
   } catch (err) {
     token = null;
   }
   if (token) {
     headers['Authorization'] = `${token}`;
   }
-  console.log({ token });
+
   headers['Content-Type'] = 'application/json';
   body = JSON.stringify({
     query: operation.text,
@@ -55,6 +56,7 @@ async function fetchQuery(
   })
     .then((response) => response.json())
     .then((response: any) => {
+
       if (isQuery && response.data) {
         cache.set(queryID, variables, response);
       }
@@ -62,26 +64,16 @@ async function fetchQuery(
       if (isMutation) {
         cache.clear();
       }
-
       if (response && response.errors) {
         throw new Error(response.errors[0].message);
       }
-      console.log({ response });
-      if (
-        response &&
-        response.errorName &&
-        response.message === 'Session invalid'
-      ) {
-        throw Error('invalid session')
+      if (response && response.errorName) {
+        throw new Error(response.message);
       }
       return response;
     })
     .catch((err) => {
-      if (['NoSession', 'SessionExpired'].includes(err.name)) {
-        console.log('session expired');
-      }
-      console.log({ err });
-      throw err;
+      throw new Error(err.message);
     });
 }
 

@@ -28,12 +28,13 @@ interface AuthInputData {
 }
 
 interface AuthContextType {
-  token: string | null;
+  userData: { token: string; userId: string };
+
   setAuthMutationInput: Dispatch<SetStateAction<AuthInputData>>;
 }
 
 const AuthenticationContext = createContext<AuthContextType>({
-  token: '',
+  userData: { token: '', userId: '' },
   setAuthMutationInput: () => {},
 });
 
@@ -45,18 +46,25 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
     password: '',
     type: undefined,
   });
-
+  const [userId, setUserId] = useState<string | null | undefined>('');
   const [createUser] = useMutation<relaySignUpMutation>(SIGN_UP_MUTATION, {
     onError: (err: any) => {},
     onCompleted: (res: relaySignUpMutationResponse) => {
-      setUserStorage(res.createUserMutation?.token);
+      setUserStorage({
+        token: res.createUserMutation?.token,
+        userId: res.createUserMutation?.userId,
+      });
     },
   });
 
   const [logInUser] = useMutation<relayLogInMutation>(LOG_IN_MUTATION, {
     onError: (err: any) => {},
     onCompleted: (res: relayLogInMutationResponse) => {
-      setUserStorage(res.loginMutation?.token);
+      console.log({ res });
+      setUserStorage({
+        token: res.loginMutation?.token,
+        userId: res.loginMutation?.userId,
+      });
     },
   });
 
@@ -65,7 +73,7 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
   );
 
   useEffect(() => {
-    //clear();
+
     const { username, password, type } = authMutationInput;
     if (type && type === 'login') {
       logInUser({
@@ -91,7 +99,10 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
 
   return (
     <AuthenticationContext.Provider
-      value={{ token: userStorage, setAuthMutationInput }}
+      value={{
+        userData: userStorage,
+        setAuthMutationInput,
+      }}
     >
       {children}
     </AuthenticationContext.Provider>

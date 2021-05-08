@@ -7,6 +7,7 @@ import Home from '../../assets/images/home.png';
 import Profile from '../../assets/images/profile-user.png';
 import EmptyScreen from '../modules/pages/EmptyScreen';
 import HomeScreen from '../modules/pages/HomeScreen';
+import ProfileScreen from '../modules/pages/ProfileScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,8 +17,8 @@ export default function BottomTabNavigator(): any {
       initialRouteName={Routes.HOME_TAB}
       tabBarOptions={{
         showLabel: false,
-        inactiveBackgroundColor: 'gray',
-        activeBackgroundColor: 'blue',
+        inactiveBackgroundColor: '#e38a46',
+        activeBackgroundColor: '#d16513',
         style: {
           borderTopWidth: 0,
           borderTopColor: 'transparent',
@@ -29,14 +30,18 @@ export default function BottomTabNavigator(): any {
         name={Routes.HOME_TAB}
         component={TabOneNavigator}
         options={{
-          tabBarIcon: () => <ImageAtom source={Home} />,
+          tabBarIcon: () => (
+            <ImageAtom style={{ tintColor: '#fff' }} source={Home} />
+          ),
         }}
       />
       <BottomTab.Screen
         name={Routes.PROFILE_TAB}
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: () => <ImageAtom source={Profile} />,
+          tabBarIcon: () => (
+            <ImageAtom style={{ tintColor: '#fff' }} source={Profile} />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -63,7 +68,7 @@ function TabTwoNavigator() {
     <ProfileTabStack.Navigator screenOptions={{ headerShown: false }}>
       <ProfileTabStack.Screen
         name={Routes.PROFILE_SCREEN}
-        component={EmptyScreen}
+        component={ProfileScreen}
       />
     </ProfileTabStack.Navigator>
   );

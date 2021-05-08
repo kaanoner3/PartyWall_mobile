@@ -9,7 +9,7 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
     setLoading(true);
     try {
       let value = await AsyncStorage.getItem(key);
-
+      console.log('buramı', value)
       if (value !== null) {
         value = JSON.parse(value);
         setLoading(false);
@@ -32,7 +32,7 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
 
   const setValue = async (value: string) => {
     try {
-      await AsyncStorage.setItem(key, value);
+      await AsyncStorage.setItem(key, JSON.stringify(value));
       setStoredValue(value);
     } catch (e) {
       console.log('useAsyncStorage setItem error', e);

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-type Status = 'error' | 'loading' | 'success' | 'noData';
+type Status = 'error' | 'loading' | 'success';
 
 type FetchResult = {
   status: Status;
   payload?: any;
 };
 
-const useFetchResults = (error: any, data: any) => {
+export function useFetchResult<T>(error: any, data: any) {
   const [result, setResult] = useState<FetchResult>({
     status: 'loading',
   });
@@ -19,16 +19,11 @@ const useFetchResults = (error: any, data: any) => {
         payload: error.message,
       };
     }
+
     if (data && data[Object.keys(data)[0]]) {
       return {
         status: 'success',
         payload: data,
-      };
-    }
-    if (data && !data[Object.keys(data)[0]]) {
-      return {
-        status: 'noData',
-        payload: undefined,
       };
     }
     return {
@@ -38,10 +33,8 @@ const useFetchResults = (error: any, data: any) => {
   };
 
   useEffect(() => {
-    setResult(calculateStatus());
+    setResult(calculateStatus);
   }, [error, data]);
 
   return result;
-};
-
-export default useFetchResults;
+}

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const sessionUtils: () => Promise<string | null> = () => {
+export const getSession: () => Promise<string | null> = () => {
   return AsyncStorage.getItem('@user');
 };
 
