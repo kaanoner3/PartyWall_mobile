@@ -39,7 +39,7 @@ async function fetchQuery(
     token = null;
   }
   if (token) {
-    headers['Authorization'] = `JWT ${token}`;
+    headers['Authorization'] = `${token}`;
   }
   console.log({ token });
   headers['Content-Type'] = 'application/json';
@@ -66,11 +66,13 @@ async function fetchQuery(
       if (response && response.errors) {
         throw new Error(response.errors[0].message);
       }
-
-      if (response && response.data.tokenAuth) {
-        const { token } = response.data;
-        console.log({ token });
-        saveSession(token);
+      console.log({ response });
+      if (
+        response &&
+        response.errorName &&
+        response.message === 'Session invalid'
+      ) {
+        throw Error('invalid session')
       }
       return response;
     })
@@ -78,6 +80,7 @@ async function fetchQuery(
       if (['NoSession', 'SessionExpired'].includes(err.name)) {
         console.log('session expired');
       }
+      console.log({ err });
       throw err;
     });
 }

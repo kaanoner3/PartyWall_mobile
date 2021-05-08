@@ -7,11 +7,10 @@ import TextAtom from '../atoms/TextAtom';
 
 interface ListItemMoleculeProps {
   isDeletable: boolean;
-  item: ItemType; // TODO: createItemType
+  item: ItemType;
 }
 
 const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item, isDeletable }) => {
-  console.log(item);
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>

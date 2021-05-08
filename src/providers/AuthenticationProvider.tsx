@@ -47,18 +47,14 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
   });
 
   const [createUser] = useMutation<relaySignUpMutation>(SIGN_UP_MUTATION, {
-    onError: (err: any) => {
-
-    },
+    onError: (err: any) => {},
     onCompleted: (res: relaySignUpMutationResponse) => {
       setUserStorage(res.createUserMutation?.token);
     },
   });
 
   const [logInUser] = useMutation<relayLogInMutation>(LOG_IN_MUTATION, {
-    onError: (err: any) => {
-
-    },
+    onError: (err: any) => {},
     onCompleted: (res: relayLogInMutationResponse) => {
       setUserStorage(res.loginMutation?.token);
     },

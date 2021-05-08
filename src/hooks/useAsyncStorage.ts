@@ -32,7 +32,7 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
 
   const setValue = async (value: string) => {
     try {
-      await AsyncStorage.setItem(key, JSON.stringify(value));
+      await AsyncStorage.setItem(key, value);
       setStoredValue(value);
     } catch (e) {
       console.log('useAsyncStorage setItem error', e);
