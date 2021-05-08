@@ -36,7 +36,13 @@ graphql`
     }
   }
 `;
-
+graphql`
+  mutation relayRemoveItemMutation($input: removeItemMutationInput!) {
+    removeItemMutation(input: $input) {
+      deletedId
+    }
+  }
+`;
 graphql`
   query relayAllItemsQuery {
     itemQuery {
@@ -56,6 +62,8 @@ graphql`
     }
   }
 `;
+
+
 
 graphql`
   query relayUserItemsQuery($userId: String!) {

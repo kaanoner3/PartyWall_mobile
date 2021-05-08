@@ -13,10 +13,10 @@ import CREATE_ITEM_MUTATION, {
   relayCreateItemMutation,
   relayCreateItemMutationResponse,
 } from '../__generated__/relayCreateItemMutation.graphql';
-import LOG_IN_MUTATION, {
-  relayLogInMutation,
-  relayLogInMutationResponse,
-} from '../__generated__/relayLogInMutation.graphql';
+import REMOVE_ITEM, {
+  relayRemoveItemMutation,
+  relayRemoveItemMutationResponse,
+} from '../__generated__/relayRemoveItemMutation.graphql';
 import { STORE_OR_NETWORK, useMutation, useQuery } from 'relay-hooks/lib';
 import { AuthenticationContext } from './AuthenticationProvider';
 import USER_ITEMS_QUERY, {
@@ -128,13 +128,25 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
     }
   );
 
-  const [removeItem] = useMutation<relayLogInMutation>(LOG_IN_MUTATION, {
+  const [removeItem] = useMutation<relayRemoveItemMutation>(REMOVE_ITEM, {
     onError: (err: any) => {},
-    onCompleted: (res: relayLogInMutationResponse) => {
-      console.log({ res });
+    onCompleted: (res: relayRemoveItemMutationResponse) => {
+      setWillRemoveItemId('');
+      userItemsQueryResult.retry({ force: true });
+      allItemsQueryResult.retry({ force: true });
     },
   });
-
+  useEffect(() => {
+    if (willRemoveItemId !== '') {
+      removeItem({
+        variables: {
+          input: {
+            id: willRemoveItemId,
+          },
+        },
+      });
+    }
+  }, [willRemoveItemId]);
   useEffect(() => {
     const {
       name,
@@ -147,6 +159,7 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
     } = itemMutationInput;
     if (shouldCreateItem) {
       let attributes = {};
+
       if (categoryId === 0) {
         attributes = { weight, description };
       } else {

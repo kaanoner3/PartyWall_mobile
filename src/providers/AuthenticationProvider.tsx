@@ -60,7 +60,7 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
   const [logInUser] = useMutation<relayLogInMutation>(LOG_IN_MUTATION, {
     onError: (err: any) => {},
     onCompleted: (res: relayLogInMutationResponse) => {
-      console.log({ res });
+
       setUserStorage({
         token: res.loginMutation?.token,
         userId: res.loginMutation?.userId,

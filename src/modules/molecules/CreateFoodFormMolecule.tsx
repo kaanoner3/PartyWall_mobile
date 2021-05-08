@@ -7,9 +7,8 @@ interface CreateFoodFormMoleculeProps {}
 
 const CreateFoodFormMolecule: FC<CreateFoodFormMoleculeProps> = ({}) => {
   const { setItemMutationInput, itemMutationInput } = useContext(ItemContext);
-  useEffect(() => {
-    setItemMutationInput({ ...itemMutationInput, categoryId: 0 });
-  }, []);
+
+
   return (
     <View style={styles.container}>
       <InputAtom

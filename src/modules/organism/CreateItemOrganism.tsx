@@ -1,30 +1,21 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import CreateFoodFormMolecule from '../molecules/CreateFoodFormMolecule';
 import CreateDrinkFromMolecule from '../molecules/CreateDrinkFromMolecule';
-import { Tabs, TabScreen } from 'react-native-paper-tabs';
-import { useNavigation } from '@react-navigation/native';
-import SIGN_UP_MUTATION, {
-  relaySignUpMutation,
-  relaySignUpMutationResponse,
-} from '../../__generated__/relaySignUpMutation.graphql';
-import {useMutation} from "relay-hooks/lib";
+import { Tabs, TabScreen, useTabIndex } from 'react-native-paper-tabs';
+import { ItemContext } from '../../providers/ItemProvider';
 
-interface CreateItemOrganismProps {
-  selectedCategory: itemCategoryType;
-}
+interface CreateItemOrganismProps {}
 
-const CreateItemOrganism: FC<CreateItemOrganismProps> = ({
-  selectedCategory,
-}) => {
-  const [createUser] = useMutation<relaySignUpMutation>(SIGN_UP_MUTATION, {
-    onError: (err: any) => {},
-    onCompleted: (res: relaySignUpMutationResponse) => {
+const CreateItemOrganism: FC<CreateItemOrganismProps> = ({}) => {
+  const { setItemMutationInput, itemMutationInput } = useContext(ItemContext);
+  const [tabIndex, setTabIndex] = useState(0);
 
-    },
-  });
+  useEffect(() => {
+    setItemMutationInput({ ...itemMutationInput, categoryId: tabIndex });
+  }, [tabIndex]);
   return (
-    <Tabs dark={true}>
+    <Tabs onChangeIndex={(index) => setTabIndex(index)} dark={true}>
       <TabScreen label="Food" icon="hamburger">
         <CreateFoodFormMolecule />
       </TabScreen>

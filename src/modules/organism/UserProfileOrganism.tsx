@@ -40,7 +40,7 @@ const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
   const redirectCreateItemPage = () => {
     navigation.navigate(Routes.CREATE_ITEM, { userId: userData.userId });
   };
-  console.log({ userItems });
+
   return (
     <View style={styles.container}>
       <HeaderMolecule

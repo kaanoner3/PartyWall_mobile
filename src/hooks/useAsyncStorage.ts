@@ -9,7 +9,7 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
     setLoading(true);
     try {
       let value = await AsyncStorage.getItem(key);
-      console.log('buramı', value)
+
       if (value !== null) {
         value = JSON.parse(value);
         setLoading(false);

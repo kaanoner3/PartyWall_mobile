@@ -4,11 +4,13 @@ import HeaderMolecule from '../molecules/HeaderMolecule';
 import CreateItemOrganism from '../organism/CreateItemOrganism';
 import ButtonAtom from '../atoms/ButtonAtom';
 import { ItemContext } from '../../providers/ItemProvider';
+import { useNavigation } from '@react-navigation/native';
 
 interface CreateItemScreenProps {}
 
 const CreateItemScreen: FC<CreateItemScreenProps> = ({}) => {
   const { setShouldCreateItem } = useContext(ItemContext);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -17,9 +19,12 @@ const CreateItemScreen: FC<CreateItemScreenProps> = ({}) => {
         isBackButtonActive
         titleStyle={styles.titleStyle}
       />
-      <CreateItemOrganism selectedCategory={'Food'} />
+      <CreateItemOrganism />
       <ButtonAtom
-        onPress={() => setShouldCreateItem(true)}
+        onPress={() => {
+          navigation.goBack();
+          setShouldCreateItem(true);
+        }}
         text="Create Item"
       />
     </View>

@@ -30,7 +30,7 @@ const ListItemMolecule: FC<ListItemMoleculeProps> = ({ item }) => {
 
       <View style={styles.infoView}>
         <TextAtom
-          value={`${item.price * item.quantity} (total price)`}
+          value={`${item.price * item.quantity} $ (total)`}
           customStyles={styles.textPrice}
         />
         <TextAtom

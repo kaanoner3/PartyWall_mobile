@@ -7,9 +7,7 @@ interface CreateDrinkFromMoleculeProps {}
 
 const CreateDrinkFromMolecule: FC<CreateDrinkFromMoleculeProps> = ({}) => {
   const { setItemMutationInput, itemMutationInput } = useContext(ItemContext);
-    useEffect(() => {
-        setItemMutationInput({ ...itemMutationInput, categoryId: 1 });
-    }, []);
+
   return (
     <View style={styles.container}>
       <InputAtom

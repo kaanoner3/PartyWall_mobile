@@ -7,16 +7,33 @@ interface ButtonAtomProps {
   onPress: () => void;
   text?: string;
   style?: StyleProp<ViewStyle>;
+  mode?: 'text' | 'contained' | 'outlined' | undefined;
+  contentStyle?: StyleProp<ViewStyle>;
+  color?: string;
+  compact?: boolean;
 }
 
 const ButtonAtom: FC<ButtonAtomProps> = ({
   icon = '',
   onPress = () => {},
-  text = 'click me',
+  text = '',
   style = {},
+  mode = 'contained',
+  contentStyle = {},
+  color = undefined,
+  compact = false,
 }) => {
   return (
-    <Button style={style} icon={icon} mode="contained" onPress={onPress}>
+    <Button
+      style={style}
+      contentStyle={contentStyle}
+      color={color}
+      icon={icon}
+      mode={mode}
+      compact={compact}
+      onPress={onPress}
+      dark
+    >
       {text}
     </Button>
   );
