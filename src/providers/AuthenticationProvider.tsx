@@ -30,6 +30,7 @@ interface AuthInputData {
 interface AuthContextType {
   userData: { token: string; userId: string };
   loading: boolean;
+  error: string | null;
   clearAuthStorage: () => void;
   setAuthMutationInput: Dispatch<SetStateAction<AuthInputData>>;
 }
@@ -37,6 +38,7 @@ interface AuthContextType {
 const AuthenticationContext = createContext<AuthContextType>({
   userData: { token: '', userId: '' },
   loading: true,
+  error: null,
   clearAuthStorage: () => {},
   setAuthMutationInput: () => {},
 });
@@ -49,24 +51,30 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
     password: '',
     type: undefined,
   });
-  const [userId, setUserId] = useState<string | null | undefined>('');
+  const [error, setError] = useState<string | null>(null);
   const [createUser] = useMutation<relaySignUpMutation>(SIGN_UP_MUTATION, {
-    onError: (err: any) => {},
+    onError: (err: any) => {
+      setError(err.message);
+    },
     onCompleted: (res: relaySignUpMutationResponse) => {
       setUserStorage({
         token: res.createUserMutation?.token,
         userId: res.createUserMutation?.userId,
       });
+      setError(null);
     },
   });
 
   const [logInUser] = useMutation<relayLogInMutation>(LOG_IN_MUTATION, {
-    onError: (err: any) => {},
+    onError: (err: any) => {
+      setError(err.message);
+    },
     onCompleted: (res: relayLogInMutationResponse) => {
       setUserStorage({
         token: res.loginMutation?.token,
         userId: res.loginMutation?.userId,
       });
+      setError(null);
     },
   });
 
@@ -103,6 +111,7 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
       value={{
         userData: userStorage,
         loading,
+        error,
         clearAuthStorage: clear,
         setAuthMutationInput,
       }}

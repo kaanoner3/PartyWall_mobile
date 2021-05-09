@@ -2,7 +2,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import BottomTabNavigator from './BottomTabNavigator';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthenticationContext } from '../providers/AuthenticationProvider';
 import { AuthenticationNavigator } from './AuthenticationNavigator';
 import * as SplashScreen from 'expo-splash-screen';
