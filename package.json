@@ -32,7 +32,8 @@
     "relay-compiler-language-typescript": "^14.0.0",
     "relay-hooks": "^4.2.0",
     "react-native-gesture-handler": "~1.10.2",
-    "react-native-reanimated": "~2.1.0"
+    "react-native-reanimated": "~2.1.0",
+    "expo-splash-screen": "~0.10.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

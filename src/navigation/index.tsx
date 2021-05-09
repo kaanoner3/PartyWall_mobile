@@ -2,9 +2,10 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import BottomTabNavigator from './BottomTabNavigator';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthenticationContext } from '../providers/AuthenticationProvider';
 import { AuthenticationNavigator } from './AuthenticationNavigator';
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function Navigation({}: {}): any {
   return (
@@ -17,7 +18,22 @@ export default function Navigation({}: {}): any {
 const Stack = createStackNavigator();
 
 function RootNavigator() {
-  const { userData } = useContext(AuthenticationContext);
+  const { userData, loading } = useContext(AuthenticationContext);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        if (!loading) {
+          await SplashScreen.hideAsync();
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    prepare();
+  }, [loading]);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
