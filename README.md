@@ -3,7 +3,7 @@
 
 Project Setup
 
-Before start setting up the PartyWall_mobile application please follow the PartyWall (backend) setup configuration 
+Before start setting up the PartyWall_mobile application please follow the PartyWall (backend) setup instruction 
 
 Run "npm run relay" to generate code to represent our queries and mutations.
 
