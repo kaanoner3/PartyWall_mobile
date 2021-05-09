@@ -5,12 +5,10 @@ import { Routes } from './routes';
 import ImageAtom from '../modules/atoms/ImageAtom';
 import Home from '../../assets/images/home.png';
 import Profile from '../../assets/images/profile-user.png';
-import EmptyScreen from '../modules/pages/EmptyScreen';
 import HomeScreen from '../modules/pages/HomeScreen';
 import ProfileScreen from '../modules/pages/ProfileScreen';
 import CreateItemScreen from '../modules/pages/CreateItemScreen';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { Route } from 'react-native';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

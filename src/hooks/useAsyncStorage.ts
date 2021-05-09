@@ -18,6 +18,8 @@ const useAsyncStorage = (key: string, initialValue: any = null) => {
     } catch (e) {
       setLoading(false);
       console.log('useAsyncStorage getItem error', e);
+    } finally {
+      setLoading(false);
     }
   };
 
