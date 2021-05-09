@@ -21,3 +21,4 @@ Things that I would implement If I have more time;
 3) I would add form validations using React Hook Form or Formik
 4) I think the design is looking decent, but color picking and user interface need more work to look more impressive.
 5) I would add unit tests for mutations and queries
+6) I would add api url to the .env file 
