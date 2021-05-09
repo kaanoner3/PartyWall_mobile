@@ -15,5 +15,5 @@ but I am not sure because I couldn't test it on both the phone and the emulator)
 Things that I would implement If I have more time;
 
 1) I would add loading indicator for mutations and queries. The system supports it but I couldn't add the loading indicator to the screens.
-2) I would improve the error handling. I would implement generic error handler provider.
+2) I would improve error handlings. That could have done by implementing a generic error handler provider.
 3) I think the design is looking decent, but color picking and user interface need more work to look more impressive.
