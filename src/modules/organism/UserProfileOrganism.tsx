@@ -24,7 +24,7 @@ const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
   const { error, data } = useQuery<relayUserItemsQuery>(
     USER_ITEMS_QUERY,
     {
-      userId: userData.userId,
+      userId: userData && userData.userId,
     },
     { fetchPolicy: STORE_OR_NETWORK }
   );
@@ -48,6 +48,7 @@ const UserProfileOrganism: FC<UserProfileOrganismProps> = ({}) => {
         showActionButtons
         title={'My Items'}
         titleStyle={styles.titleStyle}
+        isLogoutActionActive={true}
       />
       <ItemListMolecule listType={'userItems'} listData={userItems} />
     </View>

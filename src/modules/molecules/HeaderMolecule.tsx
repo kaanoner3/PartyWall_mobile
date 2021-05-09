@@ -1,7 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { View, Text, StyleSheet, TextStyle } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { AuthenticationContext } from '../../providers/AuthenticationProvider';
+import TextAtom from '../atoms/TextAtom';
 
 interface HeaderMoleculeProps {
   title: string;
@@ -10,6 +12,7 @@ interface HeaderMoleculeProps {
   titleStyle?: TextStyle;
   onActionPress?: () => void;
   isBackButtonActive?: boolean;
+  isLogoutActionActive?: boolean;
 }
 
 const HeaderMolecule: FC<HeaderMoleculeProps> = ({
@@ -19,8 +22,10 @@ const HeaderMolecule: FC<HeaderMoleculeProps> = ({
   showActionButtons = false,
   onActionPress = () => {},
   isBackButtonActive = false,
+  isLogoutActionActive = false,
 }) => {
   const navigation = useNavigation();
+  const { clearAuthStorage } = useContext(AuthenticationContext);
   return (
     <Appbar.Header>
       {isBackButtonActive && (
@@ -29,6 +34,17 @@ const HeaderMolecule: FC<HeaderMoleculeProps> = ({
           icon="arrow-left-circle"
           onPress={() => navigation.goBack()}
         />
+      )}
+      {isLogoutActionActive && (
+        <>
+          <Appbar.Action
+            color="#fff"
+            accessibilityLabel={'Log out'}
+            icon="logout"
+            onPress={clearAuthStorage}
+          />
+          <TextAtom customStyles={{ color: '#fff' }} value={'Logout'} />
+        </>
       )}
       <Appbar.Content
         titleStyle={titleStyle}

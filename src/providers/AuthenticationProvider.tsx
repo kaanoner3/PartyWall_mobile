@@ -30,12 +30,14 @@ interface AuthInputData {
 interface AuthContextType {
   userData: { token: string; userId: string };
   loading: boolean;
+  clearAuthStorage: () => void;
   setAuthMutationInput: Dispatch<SetStateAction<AuthInputData>>;
 }
 
 const AuthenticationContext = createContext<AuthContextType>({
   userData: { token: '', userId: '' },
   loading: true,
+  clearAuthStorage: () => {},
   setAuthMutationInput: () => {},
 });
 
@@ -101,6 +103,7 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
       value={{
         userData: userStorage,
         loading,
+        clearAuthStorage: clear,
         setAuthMutationInput,
       }}
     >
