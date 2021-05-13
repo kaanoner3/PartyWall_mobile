@@ -63,8 +63,6 @@ graphql`
   }
 `;
 
-
-
 graphql`
   query relayUserItemsQuery($userId: String!) {
     userQuery {

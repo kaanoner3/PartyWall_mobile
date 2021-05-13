@@ -12,7 +12,7 @@ const CreateItemOrganism: FC<CreateItemOrganismProps> = ({}) => {
   const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
-    setItemMutationInput({ ...itemMutationInput, categoryId: tabIndex });
+    setItemMutationInput({ ...itemMutationInput, categoryId: tabIndex + 1 });
   }, [tabIndex]);
   return (
     <Tabs onChangeIndex={(index) => setTabIndex(index)} dark={true}>

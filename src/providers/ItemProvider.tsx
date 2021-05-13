@@ -156,7 +156,7 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
     } = itemMutationInput;
     if (shouldCreateItem) {
       let attributes = {};
-      if (categoryId === 0) {
+      if (categoryId === 1) {
         attributes = { weight, description };
       } else {
         attributes = { volume };
@@ -164,7 +164,6 @@ const ItemProvider: FC<ItemProviderProps> = ({ children }) => {
       createItem({
         variables: {
           input: {
-            userId: userData.userId,
             categoryId,
             name,
             price,

@@ -42,7 +42,6 @@ type createCategoryMutationPayload {
 
 input createItemMutationInput {
   categoryId: Int!
-  userId: String!
   name: String!
   price: Int!
   quantity: Int!
